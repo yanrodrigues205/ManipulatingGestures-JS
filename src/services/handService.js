@@ -1,14 +1,47 @@
+import { gestureStrings, knownGestures,  } from "./gesturesService"
 export default class HandService
 {
-    #fingerpose
+    #gestureEstimator
     #handPoseDetection
     #handsVersion
     #detector = null
     constructor({ figerpose, handPoseDetection, handsVersion })
     {
-        this.#fingerpose = figerpose;
+        this.#gestureEstimator = new figerpose.GestureEstimator(knownGestures);
         this.#handPoseDetection = handPoseDetection;
         this.#handsVersion = handsVersion;
+    }
+
+    async estimate(keypoints3D)
+    {
+        const predictions = await this.#gestureEstimator.estimate(
+            this.#landMarksConvert(keypoints3D),
+            9 // de 90 porecento de certeza que o elemento é uma mão
+        );
+        return predictions.gestures;
+    }
+
+    #landMarksConvert(keypoints3D)
+    {
+        const convert = keypoints3D.map(keypoint => 
+        [keypoint.x, keypoint.y, keypoint.z]
+        )
+    }
+
+    async * detectGestures(predictions)
+    {
+        for(const hand of predictions)
+        {
+            if(!hand.keypoints3D) continue;
+            const gestures = await this.estimate(hand.keypoint3D);
+            
+            if(!gestures.lenght) continue;
+            const result = gestures.reduce(
+                (previous, current) => (previus.score > current.score) ? previous : current
+            )
+
+            console.log("dectected mão" , gestureStrings[result.name]);
+        }
     }
 
     async detectorHands(video)
