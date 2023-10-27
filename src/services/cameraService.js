@@ -27,11 +27,11 @@ export default class CameraService
         
 
         const stream = await navigator.mediaDevices.getUserMedia(videoConfig);
-        const camera = new Camera();
+        const camera = new CameraService();
         camera.video.srcObject = stream;
         camera.video.height = 240;
         camera.video.width = 320;
-        camera.body.prepend(camera.video)
+        document.body.prepend(camera.video)
 
         await new Promise((resolve) => {
             camera.video.onloadedmetadata = () => {

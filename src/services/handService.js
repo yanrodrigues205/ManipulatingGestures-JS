@@ -11,11 +11,12 @@ export default class HandService
         this.#handsVersion = handsVersion;
     }
 
-    async handDetector(video)
+    async detectorHands(video)
     {
+        console.log("entrou!");
         return this.#detector.estimateHands(video, {
-            flipHoizontal: true
-        })
+            flipHorizontal: true
+        });
     }
 
     async initializeDetector()
@@ -32,7 +33,7 @@ export default class HandService
             maxHands: 2,
         }
 
-        const detector = await this.#handPoseDetection.createDetector(
+        this.#detector = await this.#handPoseDetection.createDetector(
             this.#handPoseDetection.SupportedModels.MediaPipeHands,
             detectorConfig
         )
