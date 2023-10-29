@@ -24,7 +24,7 @@ export default class HandService
     #landMarksConvert(keypoints3D)
     {
         const convert = keypoints3D.map(keypoint => 
-        [keypoint.x, keypoint.y, keypoint.z]
+            [keypoint.x, keypoint.y, keypoint.z]
         )
     }
 
@@ -33,13 +33,16 @@ export default class HandService
         for(const hand of predictions)
         {
             if(!hand.keypoints3D) continue;
-            const gestures = await this.estimate(hand.keypoint3D);
+            const gestures = await this.estimate(hand.keypoints3D);
             
             if(!gestures.lenght) continue;
             const result = gestures.reduce(
                 (previous, current) => (previus.score > current.score) ? previous : current
             )
 
+            const { x, y } = hand.keypoints.find( keypoint => keypoint.name === "index_finger_tip");
+
+            yield { event: result.name, x, y}
             console.log("dectected mão" , gestureStrings[result.name]);
         }
     }

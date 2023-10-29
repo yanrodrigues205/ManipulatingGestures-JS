@@ -15,7 +15,9 @@ export default class HandController
         try
         {
             const hands = await this.#service.detectorHands(this.#camera.video);
-            for await(const gesture of this.#service.detectGestures(hands)) {}
+            for await(const { event, x, y} of this.#service.detectGestures(hands)) {
+                console.log({event, x, y});
+            }
         }
         catch(err)
         {
