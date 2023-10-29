@@ -26,16 +26,20 @@ export default class HandService
         const convert = keypoints3D.map(keypoint => 
             [keypoint.x, keypoint.y, keypoint.z]
         )
+
     }
 
     async * detectGestures(predictions)
     {
         for(const hand of predictions)
         {
-            if(!hand.keypoints3D) continue;
+            if(!hand.keypoints3D) continue
+
             const gestures = await this.estimate(hand.keypoints3D);
             
-            if(!gestures.lenght) continue;
+
+            if(!gestures.lenght) continue
+
             const result = gestures.reduce(
                 (previous, current) => (previus.score > current.score) ? previous : current
             )
