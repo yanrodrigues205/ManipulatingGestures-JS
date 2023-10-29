@@ -1,4 +1,4 @@
-import { gestureStrings, knownGestures,  } from "./gesturesService"
+import { gestureStrings, knownGestures,  } from "./gesturesService.js"
 export default class HandService
 {
     #gestureEstimator
