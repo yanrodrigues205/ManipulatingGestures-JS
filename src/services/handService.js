@@ -26,7 +26,7 @@ export default class HandService
         const convert = keypoints3D.map(keypoint => 
             [keypoint.x, keypoint.y, keypoint.z]
         )
-
+        return convert;
     }
 
     async * detectGestures(predictions)
@@ -35,7 +35,7 @@ export default class HandService
         {
             if(!hand.keypoints3D) continue;
 
-            const gestures = await this.estimate(hand.keypoint3D);
+            const gestures = await this.estimate(hand.keypoints3D);
             
 
             if(!gestures.length) continue;
