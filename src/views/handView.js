@@ -10,7 +10,6 @@ export default class HandView
         scroll({
             top,
             behavior: "smooth"
-
         });
     }
 }

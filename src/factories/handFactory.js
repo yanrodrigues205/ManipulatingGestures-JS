@@ -22,8 +22,10 @@ const handFactory = {
                 handPoseDetection: window.handPoseDetection,
                 handsVersion: window.VERSION
             }),
-
+          
         });
+       
+        
     }
 }
 

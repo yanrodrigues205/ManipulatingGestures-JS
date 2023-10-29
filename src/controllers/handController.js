@@ -1,5 +1,5 @@
 import { prepareRunChecker } from "../services/timeService.js";
-const { shouldRun: scrollShouldRun } = prepareRunChecker({ timerDelay: 200 });
+const {shouldRun: scrollShouldRun} = prepareRunChecker({ timerDelay: 200})
 export default class HandController
 {
     #view
@@ -16,31 +16,15 @@ export default class HandController
         this.#camera = camera;
     }
 
-    #scrollPage(direction)
-    {
-        const qtd = 100;
-        if(this.#lastDirection.direction === direction)
-        {
-            this.#lastDirection.y = (
-                direction === "scroll-down" ?
-                this.#lastDirection.y + qtd :
-                this.#lastDirection.y - qtd 
-            )
-        }
-        else
-        {
-            this.#lastDirection.direction = direction
-        }
-
-        this.#view.scrollPage(this.#lastDirection.y);
-    }
-
+    
     async #detectorHands()
     {
         try
         {
             const hands = await this.#service.detectorHands(this.#camera.video);
             for await(const { event, x, y} of this.#service.detectGestures(hands)) {
+
+                console.log(event, x, y)
                 if(event.includes("scroll"))
                 {
                     if(!scrollShouldRun()) continue;
@@ -64,6 +48,25 @@ export default class HandController
     async init()
     {
       return this.#loop();
+    }
+
+    #scrollPage(direction)
+    {
+        const qtd = 200;
+        if(this.#lastDirection.direction === direction)
+        {
+            this.#lastDirection.y = (
+                direction === 'scroll-down' ?
+                this.#lastDirection.y + qtd :
+                this.#lastDirection.y - qtd
+            );
+        }
+        else
+        {
+            this.#lastDirection.direction = direction
+        }
+
+        this.#view.scrollPage(this.#lastDirection.y);
     }
 
     static async initialize(dependencies)

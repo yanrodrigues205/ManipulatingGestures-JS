@@ -53,7 +53,7 @@ export default class HandService
 
     async detectorHands(video)
     {
-        console.log("entrou!");
+     
         return this.#detector.estimateHands(video, {
             flipHorizontal: true
         });
