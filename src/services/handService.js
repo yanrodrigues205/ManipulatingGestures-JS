@@ -33,16 +33,16 @@ export default class HandService
     {
         for(const hand of predictions)
         {
-            if(!hand.keypoints3D) continue
+            if(!hand.keypoints3D) continue;
 
-            const gestures = await this.estimate(hand.keypoints3D);
+            const gestures = await this.estimate(hand.keypoint3D);
             
 
-            if(!gestures.length) continue
+            if(!gestures.length) continue;
 
             const result = gestures.reduce(
                 (previous, current) => (previus.score > current.score) ? previous : current
-            )
+            );
 
             const { x, y } = hand.keypoints.find( keypoint => keypoint.name === "index_finger_tip");
 
