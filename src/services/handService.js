@@ -7,7 +7,7 @@ export default class HandService
     #detector = null
     constructor({ figerpose, handPoseDetection, handsVersion })
     {
-        this.#gestureEstimator = new figerpose.GestureEstimator(knownGestures);
+        this.#gestureEstimator = new window.fp.GestureEstimator(knownGestures);
         this.#handPoseDetection = handPoseDetection;
         this.#handsVersion = handsVersion;
     }
