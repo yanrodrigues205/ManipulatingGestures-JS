@@ -1,4 +1,4 @@
-import { prepareRunChecker } from "../services/timeService";
+import { prepareRunChecker } from "../services/timeService.js";
 const { shouldRun: scrollShouldRun } = prepareRunChecker({ timerDelay: 200 });
 export default class HandController
 {
