@@ -4,4 +4,13 @@ export default class HandView
     {
         requestAnimationFrame(funct);
     }
+
+    scrollPage(top)
+    {
+        scroll({
+            top,
+            behavior: "smooth"
+
+        });
+    }
 }
