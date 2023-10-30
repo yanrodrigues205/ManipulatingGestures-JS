@@ -16,7 +16,33 @@ export default class HandView
 
     drawResults(hands)
     {
-        console.assert;
+        for(const { keypoints, handedness } of hands )
+        {
+            if(!keypoints) continue;
+
+            this.#canvasContext.fillStyle = handedness === "Left" ? "red" : "green";
+            this.#canvasContext.strokeStyle = "black";
+            this.#canvasContext.lineWidth = 8;
+            this.#canvasContext.lineJoin = "round";
+            this.#drawJuntas(keypoints);
+        }   
+    }
+
+    #drawJuntas(keypoints)
+    {
+        for(const { x, y} of keypoints)
+        {
+            this.#canvasContext.beginPath();;
+
+            const newX = x + 2;
+            const newY = y + 2;
+            const radius = 3;
+            const startAngle = 0;
+            const endAngle = 2 * Math.PI;
+
+            this.#canvasContext.arc(newX, newY, radius, startAngle, endAng);
+            this.#canvasContext.fill();
+        }
     }
 
 
