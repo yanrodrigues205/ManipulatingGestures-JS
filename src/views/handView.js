@@ -2,11 +2,12 @@ export default class HandView
 {
     #canvas = document.querySelector("#hands");
     #canvasContext = this.#canvas.getContext("2d");
-
-    constructor()
+    #fingerIndecex
+    constructor({ fingerIndecex })
     {
         this.#canvasContext.width = globalThis.screen.availWidth;
         this.#canvasContext.height = globalThis.screen.availHeight;
+        this.#fingerIndecex = fingerIndecex;
     }
 
     clearCanvas()
@@ -25,6 +26,7 @@ export default class HandView
             this.#canvasContext.lineWidth = 8;
             this.#canvasContext.lineJoin = "round";
             this.#drawJuntas(keypoints);
+            this.#drawFingersAndHoversElements(keypoints);
         }   
     }
 
@@ -40,7 +42,7 @@ export default class HandView
             const startAngle = 0;
             const endAngle = 2 * Math.PI;
 
-            this.#canvasContext.arc(newX, newY, radius, startAngle, endAng);
+            this.#canvasContext.arc(newX, newY, radius, startAngle, endAngle);
             this.#canvasContext.fill();
         }
     }
@@ -49,6 +51,29 @@ export default class HandView
     loop(funct)
     {
         requestAnimationFrame(funct);
+    }
+
+    #drawFingersAndHoversElements(keypoints)
+    {
+        const fingers = Object.keys(this.#fingerIndecex);
+        for(const finger of fingers)
+        {
+            const points = this.#fingerIndecex[finger].map(
+                index => keypoints[index]
+            );
+
+            const region = new Path2D();
+            // 0 palma da mão
+            const [{ x, y }] = points;
+            region.moveTo(x, y);
+
+            for(const point of points)
+            {
+                region.lineTo(point.x, point.y);
+            }
+
+            this.#canvasContext.stroke(region);
+        }
     }
 
     scrollPage(top)

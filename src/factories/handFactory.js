@@ -9,6 +9,8 @@ import HandController from "../controllers/handController.js";
 import HandView from "../views/handView.js";
 import HandService from "../services/handService.js";
 import CameraService from "../services/cameraService.js"
+import { fingerIndecex, gestureStrings, knownGestures } from "../services/keypointHandsService.js"
+
 
 const camera = await CameraService.init();
 const handFactory = {
@@ -16,11 +18,15 @@ const handFactory = {
     {
         return HandController.initialize({
             camera,
-            view: new HandView(),
+            view: new HandView({
+                fingerIndecex
+            }),
             service: new HandService({
                 fingerpose: window.fp,
                 handPoseDetection: window.handPoseDetection,
-                handsVersion: window.VERSION
+                handsVersion: window.VERSION,
+                gestureStrings,
+                knownGestures
             }),
           
         });
@@ -29,4 +35,4 @@ const handFactory = {
     }
 }
 
-export default handFactory
+export default handFactory;
