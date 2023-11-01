@@ -1,3 +1,4 @@
+import { knownGestures } from "./gesturesService.js"
 export default class HandService
 {
     #gestureEstimator
@@ -5,11 +6,10 @@ export default class HandService
     #handsVersion
     #detector = null
     #gestureStrings
-    #knownGestures
 
-    constructor({ figerpose, handPoseDetection, handsVersion, gestureStrings, knownGestures })
+    constructor({ figerpose, handPoseDetection, handsVersion, gestureStrings})
     {
-        this.#gestureEstimator = new window.fp.GestureEstimator(this.#knownGestures);
+        this.#gestureEstimator = new window.fp.GestureEstimator(knownGestures);
         this.#handPoseDetection = handPoseDetection;
         this.#handsVersion = handsVersion;
         this.#gestureStrings = gestureStrings;
@@ -25,14 +25,6 @@ export default class HandService
         return predictions.gestures;
     }
 
-    #landMarksConvert(keypoints3D)
-    {
-        const convert = keypoints3D.map(keypoint => 
-            [keypoint.x, keypoint.y, keypoint.z]
-        )
-        return convert;
-    }
-
     async * detectGestures(predictions)
     {
         for(const hand of predictions)
@@ -45,7 +37,7 @@ export default class HandService
             if(!gestures.length) continue;
 
             const result = gestures.reduce(
-                (previous, current) => (previus.score > current.score) ? previous : current
+                (previous, current) => (previous.score > current.score) ? previous : current
             );
 
             const { x, y } = hand.keypoints.find( keypoint => keypoint.name === "index_finger_tip");
@@ -55,6 +47,15 @@ export default class HandService
         }
     }
 
+
+    #landMarksConvert(keypoints3D)
+    {
+        return keypoints3D.map(keypoint => 
+            [keypoint.x, keypoint.y, keypoint.z]
+        )
+    }
+
+   
     async detectorHands(video)
     {
      
