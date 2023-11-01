@@ -5,14 +5,14 @@ export default class HandView
     #fingerIndecex
     constructor({ fingerIndecex })
     {
-        this.#canvasContext.width = globalThis.screen.availWidth;
-        this.#canvasContext.height = globalThis.screen.availHeight;
+        this.#canvas.width = globalThis.screen.availWidth;
+        this.#canvas.height = globalThis.screen.availHeight;
         this.#fingerIndecex = fingerIndecex;
     }
 
     clearCanvas()
     {
-        this.#canvasContext.clearRect(0, 0, this.#canvasContext.width, this.#canvasContext.height);
+        this.#canvasContext.clearRect(0, 0, this.#canvas.width, this.#canvas.height);
     }
 
     drawResults(hands)
