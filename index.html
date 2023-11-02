@@ -8,19 +8,19 @@
 </head>
 <body>
     <canvas id="hands"></canvas>
-    <div class="card" >
+    <div class="card"  onclick="teste(this)">
         <h4>Card</h4>
     </div><br>
     
-    <div class="card">
+    <div class="card"  onclick="teste(this)">
             <h4>Card</h4>
     </div><br>
     
-    <div class="card">
+    <div class="card"  onclick="teste(this)">
         <h4>Card</h4>
     </div><br>
     
-    <div class="card" onclick="alert()">
+    <div class="card" onclick="teste(this)">
         <h4>Card</h4>
     </div><br>
         
@@ -29,7 +29,19 @@
     
     
 
-   
+   <script type="text/javascript">
+    function teste(e)
+    {
+        if(e.style.background == 'gray')
+        {
+            e.style.background = 'green';
+        }
+        else
+        {
+            e.style.background = 'gray';
+        }
+    }
+   </script>
     <script type="module" src="./src/index.js"></script>
 </body>
 </html>

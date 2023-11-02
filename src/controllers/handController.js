@@ -1,6 +1,6 @@
 import { prepareRunChecker } from "../services/timeService.js";
 const {shouldRun: scrollShouldRun} = prepareRunChecker({ timerDelay: 200})
-const {shouldRun: clickShouldRun} = prepareRunChecker({ timerDelay: 500})
+const {shouldRun: clickShouldRun} = prepareRunChecker({ timerDelay: 600})
 export default class HandController
 {
     #view

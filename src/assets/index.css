@@ -20,7 +20,7 @@ canvas
 
 .card{
     display: flex;
-    background-color: gray;
+    background: gray;
     flex-direction: column;
     height: 200px;
     width: 200px;

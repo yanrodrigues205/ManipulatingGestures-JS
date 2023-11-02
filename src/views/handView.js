@@ -93,7 +93,7 @@ export default class HandView
 
        elemento.dispatchEvent(evento);
 
-       console.log({elemento, x, y});
+      // console.log({elemento, x, y});
        this.#canvas.style.zIndex = "0";
 
     }
