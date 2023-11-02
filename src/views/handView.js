@@ -90,7 +90,12 @@ export default class HandView
         const elemento = document.elementFromPoint(tip.x, tip.y);
         if(!elemento) return;
 
-        console.log({elemento})
+        this.#canvas.style.display = "none";
+        const fn = () => this.#styler.toggleStyle(elemento, ":hover");
+        fn();
+
+        setTimeout(()=> fn(), 500);
+        this.#canvas.style.display = "n";
     }
 
     clickOnElement(x, y)
