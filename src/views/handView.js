@@ -5,8 +5,8 @@ export default class HandView
     #fingerIndecex
     constructor({ fingerIndecex })
     {
-        this.#canvas.width = globalThis.screen.availWidth;
-        this.#canvas.height = globalThis.screen.availHeight;
+        this.#canvas.width =  document.body.clientWidth;
+        this.#canvas.height = document.body.clientHeight;
         this.#fingerIndecex = fingerIndecex;
     }
 
@@ -78,11 +78,11 @@ export default class HandView
 
     clickOnElement(x, y)
     {
+        this.#canvas.style.zIndex = "-1";
         const elemento = document.elementFromPoint(x, y);
         if(!elemento) return;
-
         const quadrado_elemento = elemento.getBoundingClientRect();
-
+        
         const evento = new MouseEvent("click", {
             view: window,
             bubbles: true,
@@ -91,9 +91,11 @@ export default class HandView
             clientY: quadrado_elemento.top + y
         });
 
-        elemento.dispatchEvent(evento);
+       elemento.dispatchEvent(evento);
 
-        console.log({elemento, x, y});
+       console.log({elemento, x, y});
+       this.#canvas.style.zIndex = "0";
+
     }
 
     scrollPage(top)

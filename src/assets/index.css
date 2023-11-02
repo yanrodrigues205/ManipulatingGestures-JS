@@ -13,12 +13,11 @@ body{
     color: white;
     background-color: rgb(46, 46, 46);
 }
-
-canvas{
+canvas
+{
     position: fixed;
-    display: flex;
-    margin-top: 0;
-} 
+}
+
 .card{
     display: flex;
     background-color: gray;

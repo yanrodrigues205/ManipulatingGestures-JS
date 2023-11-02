@@ -8,4 +8,4 @@ const fingerIndecex = {
     pinky: [0, 17, 18, 19, 20]
 }
 
-export { fingerIndecex, knownGestures, gestureStrings};
+export { fingerIndecex,  gestureStrings, knownGestures};
