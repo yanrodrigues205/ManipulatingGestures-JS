@@ -76,6 +76,26 @@ export default class HandView
         }
     }
 
+    clickOnElement(x, y)
+    {
+        const elemento = document.elementFromPoint(x, y);
+        if(!element) return;
+
+        const quadrado_elemento = elemento.getBoundingClientRect();
+
+        const evento = new MouseEvent("click", {
+            view: window,
+            bubbles: true,
+            cancelable: true,
+            clientX: quadrado_elemento.left + x,
+            clientY: quadrado_elemento.top + y
+        });
+
+        elemento.dispatchEvent(evento);
+
+        console.log({element, x, y})
+    }
+
     scrollPage(top)
     {
         scroll({
