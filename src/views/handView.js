@@ -81,19 +81,19 @@ export default class HandView
         const elemento = document.elementFromPoint(x, y);
         if(!elemento) return;
 
-        // const quadrado_elemento = elemento.getBoundingClientRect();
+        const quadrado_elemento = elemento.getBoundingClientRect();
 
-        // const evento = new MouseEvent("click", {
-        //     view: window,
-        //     bubbles: true,
-        //     cancelable: true,
-        //     clientX: quadrado_elemento.left + x,
-        //     clientY: quadrado_elemento.top + y
-        // });
+        const evento = new MouseEvent("click", {
+            view: window,
+            bubbles: true,
+            cancelable: true,
+            clientX: quadrado_elemento.left + x,
+            clientY: quadrado_elemento.top + y
+        });
 
-        // elemento.dispatchEvent(evento);
+        elemento.dispatchEvent(evento);
 
-        console.log({elemento, x, y})
+        console.log({elemento, x, y});
     }
 
     scrollPage(top)
