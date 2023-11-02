@@ -16,7 +16,7 @@ body{
 
 canvas{
     position: absolute;
-    margin-top: 0;
+    top: 0;
     display: flex;
 } 
 .card{
