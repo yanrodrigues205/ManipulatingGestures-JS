@@ -22,7 +22,7 @@ export default class HandView
             if(!keypoints) continue;
 
             this.#canvasContext.fillStyle = handedness === "Left" ? "red" : "green";
-            this.#canvasContext.strokeStyle = "black";
+            this.#canvasContext.strokeStyle = "white";
             this.#canvasContext.lineWidth = 8;
             this.#canvasContext.lineJoin = "round";
             this.#drawJuntas(keypoints);

@@ -60,7 +60,7 @@ export default class HandController
 
     #scrollPage(direction)
     {
-        const qtd = 200;
+        const qtd = 100;
         if(this.#lastDirection.direction === direction)
         {
             this.#lastDirection.y = (
