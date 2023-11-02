@@ -36,8 +36,8 @@ export default class HandView
         {
             this.#canvasContext.beginPath();;
 
-            const newX = x + 2;
-            const newY = y + 2;
+            const newX = x - 2;
+            const newY = y - 2;
             const radius = 3;
             const startAngle = 0;
             const endAngle = 2 * Math.PI;
