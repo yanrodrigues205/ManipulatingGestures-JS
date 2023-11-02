@@ -3,11 +3,16 @@ export default class HandView
     #canvas = document.querySelector("#hands");
     #canvasContext = this.#canvas.getContext("2d");
     #fingerIndecex
-    constructor({ fingerIndecex })
+    #styler
+    constructor({ fingerIndecex, styler })
     {
         this.#canvas.width =  document.body.clientWidth;
         this.#canvas.height = document.body.clientHeight;
         this.#fingerIndecex = fingerIndecex;
+        this.#styler =styler;
+        setTimeout(() => {
+            styler.loadDocumentStyles();    
+        }, 200);
     }
 
     clearCanvas()
@@ -73,7 +78,19 @@ export default class HandView
             }
 
             this.#canvasContext.stroke(region);
+            this.#hover(finger, points);
         }
+    }
+
+    #hover(finger, points)
+    {
+        if(finger !== "indexFinger") return;
+
+        const tip = points.find(item => item.name === "index_finger_tip")
+        const elemento = document.elementFromPoint(tip.x, tip.y);
+        if(!elemento) return;
+
+        console.log({elemento})
     }
 
     clickOnElement(x, y)

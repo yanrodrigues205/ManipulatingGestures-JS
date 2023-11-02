@@ -11,7 +11,7 @@ import HandService from "../services/handService.js";
 import CameraService from "../services/cameraService.js"
 import { fingerIndecex, gestureStrings, knownGestures } from "../services/keypointHandsService.js"
 
-
+const styler = new PseudoStyler();
 const camera = await CameraService.init();
 const handFactory = {
     async initialize()
@@ -19,7 +19,8 @@ const handFactory = {
         return HandController.initialize({
             camera,
             view: new HandView({
-                fingerIndecex
+                fingerIndecex,
+                styler
             }),
             service: new HandService({
                 fingerpose: window.fp,
